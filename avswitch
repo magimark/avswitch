@@ -1,0 +1,24 @@
+case $1 in 
+  n)
+   echo "North"
+   controller="10.10.1.225"
+  ;;
+  s)
+   echo "South"
+   controller="10.10.1.226"
+  ;;
+  g)
+   echo "grandeShores"
+   controller="10.10.2.2"
+esac
+ip="192.168.8.2"$2
+echo $ip
+echo $controller
+
+sst="ssh -X -Y -A -g -t -c aes128-ctr -o CheckHostIp=no -L 443:"$ip":443 -L 80:"$ip":80 -p 22 unifi@"$controller
+echo $sst
+eval $sst
+#ssh -X -Y -A -g -t -c aes128-ctr -o CheckHostIp=no \
+#-L 443:$ip:443 \
+#-L 80:$ip:80 \
+#-p 22 unifi@$controller
